@@ -1,0 +1,23 @@
+{
+  "name": "head-arena-game-server",
+  "version": "4.46.0",
+  "description": "Head Arena authoritative match server \u2014 Zeabur trial",
+  "main": "server.cjs",
+  "scripts": {
+    "start": "node server.cjs",
+    "test": "node tests.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@napi-rs/canvas": "0.1.80",
+    "linkedom": "0.18.12",
+    "ws": "8.22.0"
+  },
+  "private": true,
+  "engines": {
+    "node": "22.x"
+  }
+}

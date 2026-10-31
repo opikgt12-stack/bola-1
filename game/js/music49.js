@@ -1,0 +1,10 @@
+'use strict';
+if(!avatarPreview45){
+ let busyMusic49=false,lastMusic49=0;
+ async function refreshMusic49(force=false){
+  if(busyMusic49||!navigator.onLine||!managedConfig||document.hidden||!force&&(state!=='menu'||Date.now()-lastMusic49<20000))return false;
+  busyMusic49=true;lastMusic49=Date.now();try{const r=await fetch('/api/public/audio',{cache:'no-store'});if(!r.ok)throw Error('Konfigurasi audio belum dapat dimuat');const d=await r.json();if(!d.sounds||typeof d.sounds!=='object')throw Error('Konfigurasi audio tidak valid');const old=managedConfig.sounds?.lobby;managedConfig.sounds={...managedConfig.sounds,...d.sounds};if(old!==managedConfig.sounds.lobby||force)window.reloadLobbyAudio49?.();return true;}catch{return false;}finally{busyMusic49=false;}
+ }
+ window.refreshMusic49=refreshMusic49;setInterval(refreshMusic49,25000);window.addEventListener('online',()=>refreshMusic49(true));document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshMusic49()});
+ const settingsMusic49=showSettings;showSettings=function(from='home'){settingsMusic49(from);const panel=document.querySelector('.settings-panel');if(!panel)return;const el=document.createElement('div');el.className='settings-field';el.innerHTML='<span>Lagu lobby terbaru<small id="musicStatus49" style="display:block;font-size:10px;max-width:220px;overflow-wrap:anywhere"></small></span><button id="refreshMusic49">Muat ulang lagu</button>';panel.append(el);const status=()=>{const d=window.lobbyAudioInfo49?.();el.querySelector('#musicStatus49').textContent=d?.error?'Audio gagal dimuat (kode '+d.error+'). Periksa file upload/format.':d?.muted?'Suara game sedang mati':!d?.music?'Musik lobby dinonaktifkan':d?.configured?.startsWith('uploads/')?'Lagu upload admin':'Lagu bawaan situs';};status();el.querySelector('#refreshMusic49').onclick=async e=>{e.currentTarget.disabled=true;const ok=await refreshMusic49(true);status();if(!ok)el.querySelector('#musicStatus49').textContent='Gagal memuat pengaturan terbaru. Periksa koneksi.';if(el.isConnected)el.querySelector('#refreshMusic49').disabled=false;};};
+}
